@@ -6,10 +6,7 @@ import Navbar from './Components/Navbar/Navbar';
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="card">
-        <h1>User Management Dashboard</h1>
-      </div>
+      <Navbar />     
     </Router>
   );
 }

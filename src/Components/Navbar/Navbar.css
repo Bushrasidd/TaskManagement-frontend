@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes logo and title apart */
+  width: 100vw;                  /* Ensures it spans the full screen */
+  background-color: black;
+  padding: 10px 20px;
+  box-sizing: border-box;       /* Prevents padding from adding to the width */
+}
+
+.navbar-logo img {
+  margin-left: 20px;
+  height: 40px; /* Adjust as needed */
+  width: auto;
+}
+.Nav-title h2 {
+  color: white;
+  margin-right: 20px; /* Remove default margin */
+}
