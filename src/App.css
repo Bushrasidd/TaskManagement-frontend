@@ -46,3 +46,22 @@
 .read-the-docs {
   color: #888;
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width:100%
+
+}
+.content-area {
+  flex:1;
+  background-color: #edbabb;
+  overflow-y: auto;
+}
+.content-area h1 {
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+  color: white;
+}

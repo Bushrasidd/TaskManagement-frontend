@@ -6,7 +6,12 @@ import Navbar from './Components/Navbar/Navbar';
 function App() {
   return (
     <Router>
-      <Navbar />     
+      <div className="app-container">
+      <Navbar />   
+      <main className='content-area'>
+        <h1>Welcome to the Task Management App</h1>
+        </main> 
+        </div> 
     </Router>
   );
 }

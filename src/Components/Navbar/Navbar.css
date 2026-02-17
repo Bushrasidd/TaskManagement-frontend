@@ -8,7 +8,7 @@ body {
   align-items: center;
   justify-content: space-between; /* Pushes logo and title apart */
   width: 100vw;                  /* Ensures it spans the full screen */
-  background-color: black;
+  background-color: rgb(219, 98, 68);
   padding: 10px 20px;
   box-sizing: border-box;       /* Prevents padding from adding to the width */
 }
