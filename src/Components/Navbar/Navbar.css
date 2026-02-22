@@ -14,11 +14,11 @@ body {
 }
 
 .navbar-logo img {
-  margin-left: 20px;
+  margin-left: 30px;
   height: 40px; /* Adjust as needed */
   width: auto;
 }
 .Nav-title h2 {
   color: white;
-  margin-right: 20px; /* Remove default margin */
+  margin-right: 30px; /* Remove default margin */
 }
