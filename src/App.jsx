@@ -15,10 +15,10 @@ function App() {
       <main className='content-area'>
         <div className='d-flex justify-content-center align-items-center mt-4'>
         <h1>Welcome to the Task Management App</h1>
-        {/* <button className='btn btn-light ms-5'>Create</button> */}
         </div>
-        <div className='d-flex justify-content-center align-items-center mt-4'>
+        <div className='d-flex justify-content-center align-items-center mt-4 gap-5'>
           <SearchBar onSearch={handleSearchAction} />
+          <button className='btn create-btn ms-5'>Create</button>
         </div>
         <div className='container-fluid p-4 mt-4'>
           <div className="row">
@@ -30,7 +30,7 @@ function App() {
         </div>
           <div className="col-12 col-lg-3">
               <div className="card border-warning p-3" style={{ minHeight: "400px" }}>
-            <h5 className="text-warning">IN PROGRESS</h5>
+            <h5 className="text-warning ">IN PROGRESS</h5>
             {/* <div className="border p-2 mt-2">In-progress</div> */}
           </div>
         </div>

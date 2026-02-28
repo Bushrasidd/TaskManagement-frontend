@@ -65,3 +65,13 @@
   text-align: center;
   color: white;
 }
+.btn.create-btn {
+  background-color: rgb(219, 98, 68);
+  color: #fff;
+  border: none; /* Bootstrap adds a border by default; this removes it */
+}
+
+.btn.create-btn:hover {
+  background-color: rgb(249, 136, 107);
+  color: #fff;
+}  
