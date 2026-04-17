@@ -9,6 +9,8 @@ function App() {
   const [showModel, setShowModel] = useState(false);
   const [alltasks, setAllTasks] = useState([]);
 
+  console.log("Current Bucket of Tasks:", alltasks);
+
   const handleCloseModel = () => {
     setShowModel(false);
     console.log("Model closed");
@@ -36,26 +38,57 @@ function App() {
           <div className="row g-4">
             <div className="col-12 col-md-6 col-lg-3">
               <div className="card border-warning p-3" style={{ minHeight: "400px"}}>
-            <h5 className="text-warning">PENDING</h5>
-            {/* <div className="border p-2 mt-2">Pending</div> */}
+            <h5 className="text-danger">PENDING</h5>
+            {alltasks
+            .filter(task=>task.status==="pending")
+            .map(task=>(
+              <div key={task.id} className="task_container border p-2 mt-2">
+                <p className="small mb-0">{task.description}</p>
+                </div>
+            ))
+            }
           </div>
         </div>
           <div className="col-12 col-md-6 col-lg-3">
               <div className="card border-warning p-3" style={{ minHeight: "400px" }}>
             <h5 className="text-warning ">IN PROGRESS</h5>
-            {/* <div className="border p-2 mt-2">In-progress</div> */}
+            {alltasks
+            .filter(task=>task.status==="in-progress")
+            .map(task=>(
+              <div key={task.id} className="task_container border p-2 mt-2">
+                <p className="small mb-0">{task.description}</p>
+                </div>
+            ))
+            }
           </div>
         </div>
           <div className="col-12 col-md-6 col-lg-3">
               <div className="card border-warning p-3" style={{ minHeight: "400px" }}>
-            <h5 className="text-warning">COMPLETED</h5>
-            {/* <div className="border p-2 mt-2">Completed</div> */}
+            <h5 className="text-success">COMPLETED</h5>
+              {alltasks
+            .filter(task=>task.status==="completed")
+            .map(task=>(
+              <div key={task.id} className="task_container border p-2 mt-2">
+                <p className="small mb-0">{task.description}</p>
+                {/* <button className="btn p-0 border-0 edit-btn">
+       <span>✏️</span> 
+    </button> */}
+                </div>
+            ))
+            }                        
           </div>
         </div>
           <div className="col-12 col-md-6 col-lg-3">
               <div className="card border-warning p-3" style={{ minHeight: "400px" }}>
-            <h5 className="text-warning">REVIEW</h5>
-            {/* <div className="border p-2 mt-2">Review</div> */}
+            <h5 className="text-info">REVIEW</h5>
+              {alltasks
+            .filter(task=>task.status==="review")
+            .map(task=>(
+              <div key={task.id} className="task_container border p-2 mt-2">
+                <p className="small mb-0">{task.description}</p>
+                </div>
+            ))
+            }
           </div>
         </div>
         </div>

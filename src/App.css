@@ -56,7 +56,7 @@
 }
 .content-area {
   flex:1;
-  background-color: #edbabb;
+  background: linear-gradient(180deg, #fce4e4 0%, #edbabb 50%, #d69a9b 100%);
   overflow-y: auto;
 }
 .content-area h1 {
@@ -75,3 +75,19 @@
   background-color: rgb(249, 136, 107);
   color: #fff;
 }  
+.task_container{
+  font-size:1.5rem;
+  color:rgb(73, 73, 73);
+  background-color:rgb(249, 165, 141);
+  border-radius:6px;  
+  background: linear-gradient(135deg, rgb(249, 165, 141) 0%, rgb(255, 120, 80) 100%);
+  border: 2px solid #6a0505 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  /* box-shadow: 2px 4px 10px rgba(0,0,0,0.1); */
+  /* padding:10px; */
+  margin-top: 10px;
+  border: 2px solid #6a0505 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+
+}
