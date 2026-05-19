@@ -37,6 +37,15 @@ const TaskModel = (props) => {
                         <option value="review">Review</option>
                       </select>
                     </div>
+                     <div className="mb-3">
+                      <label className="form-label">Priority</label>
+                      <select name="priority" className="form-select" required>
+                        <option value="">Select Priority</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                      </select>
+                    </div>
                     <div className="mb-3">
                       <label className="form-label">Description</label>
                       <textarea name="description" className="form-control" rows="3" />
