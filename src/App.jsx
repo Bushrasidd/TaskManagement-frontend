@@ -1,19 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import TaskModel from './Components/taskmodel';
 import DeleteConfirmModal from './Components/DeleteConfirmModal';
-
-
+import ProtectedRoute from './Components/ProtectedRoute';
+import { getAllUsers } from './services/authService';
 function App() {
   const [showModel, setShowModel] = useState(false);
   const [alltasks, setAllTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null); 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
+  const [teamMembers, setTeamMembers] = useState([]);
 
+  const loggedInUser = JSON.parse(localStorage.getItem('user'));
+  const userRole = loggedInUser ? loggedInUser.role : null;
+
+   useEffect(() => {
+      const fetchUsers = async () => {
+        try {
+          const data = await getAllUsers();
+          setTeamMembers(data); // Store the list of executives
+        } catch (err) {
+          console.error("Could not load team members", err);
+        }
+      };
+      fetchUsers();
+    }, []);
+  
+
+
+  
   const handleOpenDeleteConfirmation = (task) => {
     setTaskToDelete(task); 
     setShowDeleteModal(true); 
@@ -75,6 +94,7 @@ function App() {
         <Route 
           path="/dashboard" 
           element={
+            <ProtectedRoute>
             <Dashboard 
               alltasks={alltasks} 
               handleOpenModel={handleOpenModelForCreate}
@@ -82,6 +102,7 @@ function App() {
               onDeleteClick={handleOpenDeleteConfirmation}
               handleSearchAction={handleSearchAction}
             />
+            </ProtectedRoute>
           } 
         />
         
@@ -93,6 +114,8 @@ function App() {
         handleCloseModel={handleCloseModel}
         onSubmit={handleFormSubmit}
         editingTask={editingTask} 
+        users={teamMembers}
+        userRole={JSON.parse(localStorage.getItem('user'))?.role}
       />
       <DeleteConfirmModal 
         show={showDeleteModal}
