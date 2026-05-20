@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard';
 import './Login';
 import appLogo from '../assets/logo.svg';
+import { registerUser } from '../services/authService';
 
 
 const Register = () => {
@@ -13,15 +14,34 @@ const Register = () => {
         password: '',
         role: ''
     });
+    const [notification, setNotification] = useState({ type: '', message: '' });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Registering user with:', formData);
-        navigate('/dashboard');
+        setNotification({ type: '', message: '' });
+
+        try {
+            const result = await registerUser(formData);
+            setNotification({
+                type: 'success',
+                message: result.message || 'User registered successfully!'
+            });
+
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+
+
+        } catch (error) {
+            setNotification({
+                type: 'danger',
+                message: error.message || 'Registration failed. Check database logs.'
+            });
+        }
     };
 
     return (
@@ -44,6 +64,12 @@ const Register = () => {
                     <h6 className="text-center mb-4 small fw-bold text-uppercase tracking-wider" style={{ color: '#D9654D', opacity: 0.8, letterSpacing: '1px' }}>
                         Create an Account
                     </h6>
+                    {notification.message && (
+                        <div className={`alert alert-${notification.type} text-center fw-bold small py-2 mb-3 shadow-sm`} role="alert">
+                            {notification.message}
+                        </div>
+                    )}
+
 
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
@@ -86,7 +112,7 @@ const Register = () => {
                         </div>
 
                         <div className="mb-4">
-                            <label className="form-label fw-bold small text-muted">Role</label>
+                            <label className="form-label fw-bold small text-muted">Account Role</label>
                             <select
                                 name="role"
                                 className="form-select py-2 shadow-sm"
@@ -94,8 +120,8 @@ const Register = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <option value="" disabled>Role</option>
-                                <option value="super-admin">Super Admin</option>
+                                <option value="" disabled>Select a Role</option>
+                                <option value="super_admin">Super Admin</option>
                                 <option value="manager">Manager</option>
                                 <option value="executive">Executive</option>
                             </select>

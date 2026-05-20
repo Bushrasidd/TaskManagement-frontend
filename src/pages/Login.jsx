@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Register';
 import appLogo from '../assets/logo.svg';
+import { loginUser } from '../services/authService';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -9,15 +9,35 @@ const Login = () => {
         email: '',
         password: ''
     });
+    const [notification, setNotification] = useState({ type: '', message: '' });
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Logging in with:', credentials);
-        navigate('/dashboard');
+        setNotification({ type: '', message: '' });
+
+        try {
+            const result = await loginUser(credentials);
+
+            setNotification({
+                type: 'success',
+                message: `Welcome back, ${result.user.name}! Logging you in...`
+            });
+
+            // Redirect after 1.5 seconds so they can see the confirmation banner
+            setTimeout(() => {
+                navigate('/dashboard');
+            }, 1500);
+
+        } catch (error) {
+            setNotification({
+                type: 'danger',
+                message: error.message
+            });
+        }
     };
 
     return (
@@ -41,6 +61,11 @@ const Login = () => {
                     <h6 className="text-center mb-4 small fw-bold text-uppercase tracking-wider" style={{ color: '#D9654D', opacity: 0.8, letterSpacing: '1px' }}>
                         User Login
                     </h6>
+                    {notification.message && (
+                        <div className={`alert alert-${notification.type} text-center fw-bold small py-2 mb-3 shadow-sm`} role="alert">
+                            {notification.message}
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
