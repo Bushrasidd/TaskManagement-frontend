@@ -1,16 +1,31 @@
-# React + Vite
+Task Management Application (Frontend)
+A modern, responsive Task Management dashboard built with React, Vite, and Bootstrap. This application allows users to track, create, update, and delete tasks with role-based access control (Super Admin, Manager, Executive).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features
+Role-Based Dashboard: Tailored views for different user roles.
 
-Currently, two official plugins are available:
+CRUD Operations: Seamlessly create, edit, delete, and view task statuses.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Real-time Feedback: Toast notifications for success and error messages using react-hot-toast.
 
-## React Compiler
+Secure Routing: Protected routes to ensure only authenticated users can access the dashboard.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Modern Tooling: Lightning-fast development experience powered by Vite.
 
-## Expanding the ESLint configuration
+Tech Stack
+Framework: React
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Build Tool: Vite
+
+Styling: React Bootstrap
+
+Authentication: JWT (JSON Web Tokens)
+
+Notifications: react-hot-toast
+
+Prerequisites
+Ensure you have the following installed on your machine:
+
+Node.js (v18 or higher recommended)
+
+npm or yarn
