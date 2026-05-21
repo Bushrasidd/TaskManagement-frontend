@@ -135,3 +135,19 @@ export const fetchDashboardData = async () => {
     
     return await response.json(); 
 };
+
+
+
+export const DeleteTask = async (taskId) => {
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${API_URL}/tasks/${taskId}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    
+    if (!response.ok) {
+        throw new Error('Failed to delete task');
+    }
+    
+    return await response.json(); 
+};

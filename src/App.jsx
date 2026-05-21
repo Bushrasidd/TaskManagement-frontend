@@ -9,6 +9,7 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import { getAllUsers } from './services/authService';
 import { fetchDashboardData } from './services/authService';
 import { useLocation } from 'react-router-dom';
+import { DeleteTask } from './services/authService';
 function App() {
   const [showModel, setShowModel] = useState(false);
   const [alltasks, setAllTasks] = useState([]);
@@ -69,12 +70,17 @@ const handleOpenDeleteConfirmation = (task) => {
   setShowDeleteModal(true);
 };
 
-const handleExecuteDelete = () => {
+const handleExecuteDelete = async () => {
   if (taskToDelete) {
-    setAllTasks(alltasks.filter(t => t.id !== taskToDelete.id));
+    try {
+      await DeleteTask(taskToDelete.id); 
+      await fetchStats();
+      setShowDeleteModal(false);
+      setTaskToDelete(null);
+    } catch (error) {
+      console.error("Delete failed", error);
+    }
   }
-  setShowDeleteModal(false);
-  setTaskToDelete(null);
 };
 
 const handleOpenModelForCreate = () => {
@@ -116,7 +122,7 @@ const handleSearchAction = (searchTerm) => {
 };
 
 return (
-  <Router>
+  <>
     <Routes>
       <Route path="/" element={<Register />} />
       <Route path="/register" element={<Register />} />
@@ -133,6 +139,7 @@ return (
               handleSearchAction={handleSearchAction}
               tasks={tasks}
               stats={stats}
+              fetchStats={fetchStats}
             />
           </ProtectedRoute>
         }
@@ -156,7 +163,7 @@ return (
       onConfirm={handleExecuteDelete}
       taskTitle={taskToDelete?.title}
     />
-  </Router>
+    </>
 );
 }
 

@@ -10,10 +10,16 @@ import '../App.css';
 import { useState, useEffect } from 'react';
 import { fetchDashboardData } from '../services/authService';
 
-function Dashboard({ alltasks, handleOpenModel, handleSearchAction, onEditClick, onDeleteClick, stats, tasks }) {
+function Dashboard({ alltasks, handleOpenModel, handleSearchAction, onEditClick, onDeleteClick, stats, tasks, fetchStats }) {
   const rawUserData = localStorage.getItem('user');
   const loggedInUser = JSON.parse(localStorage.getItem('user'));
   const userRole = loggedInUser ? loggedInUser.role : null;
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+        fetchStats(); 
+    }
+}, []);
  
 
   const dashboardCards = [

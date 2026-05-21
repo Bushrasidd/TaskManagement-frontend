@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeleteConfirmModal = ({ show, onClose, onConfirm, taskTitle }) => {
+const DeleteConfirmModal = ({ show, onClose, onConfirm, taskTitle, onDelete }) => {
   if (!show) return null;
 
   return (
