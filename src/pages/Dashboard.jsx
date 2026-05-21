@@ -49,6 +49,7 @@ function Dashboard({ alltasks, handleOpenModel, handleSearchAction, onEditClick,
                   <p className="small mb-0 text-dark fw-medium">{task.title}</p>
                   <Box>
                     <IconButton size="small" onClick={() => onEditClick(task)}><EditIcon fontSize="small" /></IconButton>
+                   
                     <IconButton size="small" sx={{ color: '#d32f2f' }} onClick={() => onDeleteClick(task)}><DeleteIcon fontSize="small" /></IconButton>
                   </Box>
                 </Box>

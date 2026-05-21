@@ -10,9 +10,12 @@ import { getAllUsers } from './services/authService';
 import { fetchDashboardData } from './services/authService';
 import { useLocation } from 'react-router-dom';
 import { DeleteTask } from './services/authService';
+import { UpdateTask } from './services/authService';
+import { createTask } from './services/authService';
+import './App.css';
+import { toast } from 'react-hot-toast';
 function App() {
   const [showModel, setShowModel] = useState(false);
-  const [alltasks, setAllTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
@@ -98,23 +101,21 @@ const handleCloseModel = () => {
   setEditingTask(null);
 };
 
-const handleFormSubmit = (taskData) => {
-  if (editingTask) {
-    setAllTasks(alltasks.map(t => t.id === editingTask.id ? { ...t, ...taskData } : t));
-  } else {
-    const newTask = {
-      ...taskData,
-      id: Date.now().toString(),
-      status: taskData.status || 'pending'
-    };
-    setAllTasks([...alltasks, newTask]);
+const handleFormSubmit = async (taskData) => { // Make this async!
+  try {
+    if (editingTask) {
+      await UpdateTask(editingTask.id, taskData);
+      toast.success('Task updated successfully!');
+    } else {
+      await createTask(taskData);
+      toast.success('Task created successfully!');
+    }
+    await fetchStats(); 
+    handleCloseModel();
+  } catch (error) {
+    console.error("Submission failed:", error);
+    toast.error('Submission failed. Please try again.');
   }
-  handleCloseModel();
-};
-
-const handleTaskDelete = (taskId) => {
-  setAllTasks(alltasks.filter(task => task.id !== taskId));
-  console.log("Deleted task with ID:", taskId);
 };
 
 const handleSearchAction = (searchTerm) => {

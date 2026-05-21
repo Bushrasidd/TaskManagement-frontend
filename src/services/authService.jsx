@@ -1,3 +1,4 @@
+import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api';
 /**
@@ -150,4 +151,16 @@ export const DeleteTask = async (taskId) => {
     }
     
     return await response.json(); 
+};
+
+
+export const UpdateTask = async (id, taskData) => {
+    const token = localStorage.getItem('token');
+    const response = await axios.put(`${API_URL}/tasks/update/${id}`,
+        taskData,
+        {
+            headers: { Authorization: `Bearer ${token}` }
+        }
+    );
+    return response.data;
 };
