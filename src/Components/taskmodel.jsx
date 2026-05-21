@@ -34,6 +34,9 @@ const TaskModel = (props) => {
         if (props.onTaskAdded) props.onTaskAdded(response.task);
         props.handleCloseModel();
       }, 1500);
+
+
+
       // if (props.onTaskAdded) {
       //   props.onTaskAdded(response.task);
       // }

@@ -124,12 +124,14 @@ export const getAllUsers = async () => {
     return response.json();
 
 };
-
- export const fetchDashboardData = async () => {
-        const response = await fetch(`${API_URL}/tasks/stats`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-        });
-        const data = await response.json();
-        setAllTasks(data.tasks);
-        setDashboardStats(data.stats);
-    };
+export const fetchDashboardData = async () => {
+    const response = await fetch(`${API_URL}/tasks/stats`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+    
+    if (!response.ok) {
+        throw new Error('Failed to fetch stats');
+    }
+    
+    return await response.json(); 
+};
